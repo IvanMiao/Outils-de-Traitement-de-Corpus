@@ -28,7 +28,7 @@ def get_authors(url: str, dynasty: str) -> list:
     return data_list
 
 
-if __name__ == '__main__':
+def main():
     dynasties = ["WeiJin", "NanBei", "Tang", "Song", "Yuan", "Ming", "Qing"]
     base_url = input("give me the base url of THE poem site:")
 
@@ -48,3 +48,7 @@ if __name__ == '__main__':
             writer.writeheader()
             for data in data_list:
                 writer.writerow(data)
+
+
+if __name__ == '__main__':
+    main()
