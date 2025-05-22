@@ -6,6 +6,16 @@ from urllib.parse import urljoin
 
 
 def get_authors(url: str, dynasty: str) -> list:
+    """
+    Récupère la liste des auteurs d'une dynastie donnée à partir d'une page web.
+    
+    Args:
+        url (str): L'URL de la page à analyser.
+        dynasty (str): Le nom de la dynastie.
+
+    Returns:
+        list: Une liste de dictionnaires contenant l'URL, le nom de l'auteur et la dynastie.
+    """
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -29,6 +39,10 @@ def get_authors(url: str, dynasty: str) -> list:
 
 
 def main():
+    """
+    Fonction principale qui collecte les auteurs pour chaque dynastie,
+    puis enregistre les résultats dans des fichiers CSV.
+    """
     dynasties = ["WeiJin", "NanBei", "Tang", "Song", "Yuan", "Ming", "Qing"]
     base_url = input("give me the base url of THE poem site:")
 

@@ -22,11 +22,14 @@ def crawl_poem(url: str) -> list:
     headers = {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
             }
-    try:
-        response = requests.get(url, headers=headers, timeout=10)
-        response.raise_for_status()
-    except Exception as e:
-        print(f"Error: {e}")
+    while True:
+        try:
+            response = requests.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+            break
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(3)
 
     soup = BeautifulSoup(response.text, 'html.parser')
     poem_divs = soup.find_all('div', class_='_poem')
@@ -65,7 +68,10 @@ def process_author_csv(input_csv, output_csv):
         author_indices = df[df['author'] == last_processed_author].index
         start = author_indices[-1] + 1
 
-    for index, row in df.iloc[start:].iterrows():
+    if start > 1000:
+        return
+    end = 1000
+    for index, row in df.iloc[start:end].iterrows():
         url = row.get('url')
         author = row.get('author')
         dynasty = row.get('dynasty')
@@ -91,7 +97,7 @@ def main():
     paths, and calls the process_author_csv function for each dynasty.
     """
     # dynasties = ["WeiJin", "NanBei", "Tang", "Song", "Yuan", "Ming", "Qing"]
-    dynasties = ["WeiJin", "NanBei"]
+    dynasties = ["WeiJin", "NanBei", "Tang"]
 
     for dynasty in dynasties:
         input_file = f'./data/raw/{dynasty}_authors.csv'

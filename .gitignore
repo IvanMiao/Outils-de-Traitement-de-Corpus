@@ -1,1 +1,7 @@
 data/raw/*.csv
+data/clean/*.csv
+data/clean/ch_poems
+model/best_model*
+model/ch_poem*
+result/
+src/train/log
