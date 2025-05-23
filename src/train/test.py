@@ -9,6 +9,7 @@ tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForSequenceClassification.from_pretrained(model_path)
 
 dataset = load_from_disk("./data/clean/ch_poems")
+
 def preprocess_function(examples):
     result = tokenizer(
         examples["Content"],

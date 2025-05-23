@@ -1,6 +1,4 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
-
-import torch
 import numpy as np
 from datasets import load_from_disk
 import evaluate
@@ -8,8 +6,11 @@ import evaluate
 
 dataset = load_from_disk("./data/clean/ch_poems")
 
-# model: option 1. distilled-bert-multilingual option 2. bert-case-chinese
-model_checkpoint = "bert-base-chinese"
+# model:
+# option 1. distilled-bert-multilingual
+# option 2. bert-case-chinese
+# option 3. guwenbert
+model_checkpoint = "ethanyt/guwenbert-base"
 tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
 
 def preprocess_function(examples):
@@ -58,7 +59,7 @@ model = AutoModelForSequenceClassification.from_pretrained(
 )
 
 training_args = TrainingArguments(
-    output_dir="./model/ch_poem_classifier_bert_chinese",
+    output_dir="./model/ch_poem_classifier_guwenbert",
     learning_rate=2e-5,
     per_device_train_batch_size=6,
     per_device_eval_batch_size=6,
@@ -81,4 +82,4 @@ trainer = Trainer(
 )
 
 trainer.train()
-trainer.save_model("./model/best_model_bert_chinese")
+trainer.save_model("./model/best_model_guwenbert")
