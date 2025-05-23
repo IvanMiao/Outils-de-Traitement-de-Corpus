@@ -7,14 +7,15 @@ from urllib.parse import urljoin
 
 def get_authors(url: str, dynasty: str) -> list:
     """
-    Récupère la liste des auteurs d'une dynastie donnée à partir d'une page web.
-    
+    Récupère la liste des auteurs d'une dynastie donnée à partir d'une page.
+
     Args:
         url (str): L'URL de la page à analyser.
         dynasty (str): Le nom de la dynastie.
 
     Returns:
-        list: Une liste de dictionnaires contenant l'URL, le nom de l'auteur et la dynastie.
+        list: Une liste de dictionnaires contenant l'URL,
+                le nom de l'auteur et la dynastie.
     """
     try:
         response = requests.get(url)

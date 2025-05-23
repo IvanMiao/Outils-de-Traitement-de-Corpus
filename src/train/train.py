@@ -1,4 +1,5 @@
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
+from transformers import AutoTokenizer, TrainingArguments, Trainer
+from transformers import AutoModelForSequenceClassification
 import numpy as np
 from datasets import load_from_disk
 import evaluate
@@ -6,12 +7,13 @@ import evaluate
 
 dataset = load_from_disk("./data/clean/ch_poems")
 
-# model:
+# pre-trained model:
 # option 1. distilled-bert-multilingual
 # option 2. bert-case-chinese
-# option 3. guwenbert
+# option 3. ethanyt/guwenbert-base
 model_checkpoint = "ethanyt/guwenbert-base"
 tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
+
 
 def preprocess_function(examples):
     result = tokenizer(
@@ -23,14 +25,16 @@ def preprocess_function(examples):
     result["labels"] = examples['lable']
     return result
 
+
 tokenized_data = dataset.map(preprocess_function, batched=True)
 
 
-accuracy = evaluate.load("accuracy")
 def compute_metrics(eval_pred):
+    accuracy = evaluate.load("accuracy")
     predictions, labels = eval_pred
     predictions = np.argmax(predictions, axis=1)
     return accuracy.compute(predictions=predictions, references=labels)
+
 
 id2label = {
     0: 'WeiJin',

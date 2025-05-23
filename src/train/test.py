@@ -2,13 +2,15 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from transformers import Trainer, TrainingArguments
 import evaluate
 import numpy as np
+from sklearn.metrics import classification_report
 from datasets import load_from_disk
 
-model_path = "./model/best_model_bert_chinese"
+model_path = "./model/best_model"
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForSequenceClassification.from_pretrained(model_path)
 
 dataset = load_from_disk("./data/clean/ch_poems")
+
 
 def preprocess_function(examples):
     result = tokenizer(
@@ -20,11 +22,13 @@ def preprocess_function(examples):
     result["labels"] = examples['lable']
     return result
 
+
 tokenized_data = dataset.map(preprocess_function, batched=True)
 test_dataset = tokenized_data["test"]
 
-accuracy = evaluate.load("accuracy")
+
 def compute_metrics(eval_pred):
+    accuracy = evaluate.load("accuracy")
     predictions, labels = eval_pred
     predictions = np.argmax(predictions, axis=1)
     return accuracy.compute(predictions=predictions, references=labels)
@@ -36,6 +40,7 @@ test_args = TrainingArguments(
     do_train=False,
     do_eval=False,
     do_predict=True,
+    use_cpu=True,
 )
 
 trainer = Trainer(
@@ -74,4 +79,14 @@ print("\nAccuracy for each Dynasty:")
 for class_id, class_name in id2label.items():
     if class_total[class_id] > 0:
         accuracy = class_correct[class_id] / class_total[class_id] * 100
-        print(f"{class_name}: {accuracy:.2f}% ({class_correct[class_id]}/{class_total[class_id]})")
+        print(f"{class_name}:{accuracy:.2f}%", end=' ')
+        print(f"{class_correct[class_id]}/{class_total[class_id]})")
+
+true_labels = [test_dataset[i]['labels'] for i in range(len(test_dataset))]
+print("\nReport of classification:")
+report = classification_report(
+    true_labels,
+    predictions,
+    target_names=[id2label[i] for i in range(7)],
+    digits=4)
+print(report)

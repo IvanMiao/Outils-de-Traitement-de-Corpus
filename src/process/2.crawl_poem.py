@@ -20,8 +20,11 @@ def crawl_poem(url: str) -> list:
     poem_list = []
 
     headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            }
+        'User-Agent': (
+                    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                    'AppleWebKit/537.36 (KHTML, like Gecko) '
+                    'Chrome/91.0.4472.124 Safari/537.36')
+    }
     while True:
         try:
             response = requests.get(url, headers=headers, timeout=10)
@@ -55,8 +58,8 @@ def process_author_csv(input_csv, output_csv):
     last processed author if the output file exists.
 
     Args:
-        input_csv: path(str) to the input CSV file containing url, author, dynasty.
-        output_csv: path(str) to the output CSV file where poems will be saved.
+        input_csv: path(str) to the input file containing url, author, dynasty.
+        output_csv: path(str) to the output file where poems will be saved.
     """
 
     df = pd.read_csv(input_csv)
@@ -84,8 +87,14 @@ def process_author_csv(input_csv, output_csv):
                 'Content': poem['Content']
             }
             new_df = pd.DataFrame([new_row])
-            new_df.to_csv(output_csv, mode='a', header=False, index=False, encoding='utf-8')
-        
+            new_df.to_csv(
+                output_csv,
+                mode='a',
+                header=False,
+                index=False,
+                encoding='utf-8'
+                )
+
         print(f"{author} Crawled ! Total: {len(poems)} poems")
         time.sleep(random.uniform(0.5, 1.5))
 
@@ -96,8 +105,7 @@ def main():
     It iterates through a list of dynasties, defines input and output file
     paths, and calls the process_author_csv function for each dynasty.
     """
-    # dynasties = ["WeiJin", "NanBei", "Tang", "Song", "Yuan", "Ming", "Qing"]
-    dynasties = ["WeiJin", "NanBei", "Tang"]
+    dynasties = ["WeiJin", "NanBei", "Tang", "Song", "Yuan", "Ming", "Qing"]
 
     for dynasty in dynasties:
         input_file = f'./data/raw/{dynasty}_authors.csv'
@@ -105,9 +113,12 @@ def main():
         if os.path.isfile(output_file):
             output_df = pd.read_csv(output_file)
         else:
-            output_df = pd.DataFrame(columns=['Dynasty', 'Author', 'Title', 'Content'])
+            output_df = pd.DataFrame(
+                columns=['Dynasty', 'Author', 'Title', 'Content']
+                )
             output_df.to_csv(output_file, index=False, encoding='utf-8')
         process_author_csv(input_file, output_file)
+
 
 if __name__ == '__main__':
     main()

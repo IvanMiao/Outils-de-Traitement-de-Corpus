@@ -30,7 +30,14 @@ Les données du projet proviennent du site *sou-yun.cn*, qui n'interdit pas l'ex
 
 Ce site a déjà classifié les poèmes par dynastie et fournit un index de tous les poèmes par auteur. Par conséquent, le projet utilise `request` et `bs4` pour analyser la structure HTML du site et extraire les données poétiques des sept dynasties sélectionnées. Pour des raisons d'efficacité lors de l'entraînement, le script d'extraction récupère les 20 premiers poèmes de chaque poète (ou le maximum disponible si inférieur à 20) pour les dynasties comptant moins de 1000 poètes, et seulement les 20 premiers poèmes des 1000 premiers poètes pour les dynasties plus prolifiques.
 
-Les données obtenues sont sauvegardées en format `.csv`, puis fusionnées en un seul grand ensemble de données qui est ensuite mélangé et divisé en trois sous-ensembles : entraînement/validation/test (selon un ratio 7:1.5:1.5). Ces ensembles sont stockés au format dataset de HuggingFace.
+Les données obtenues sont sauvegardées en format `.csv`, puis fusionnées en un seul grand ensemble de données qui est ensuite mélangé et divisé en trois sous-ensembles : entraînement/validation/test (selon un ratio **7:1.5:1.5**, avec une répartition réelle des données de **17418:3733:3738**). Ces ensembles sont stockés au format dataset de HuggingFace.
+
+| Ensemble de données | Ratio           | Quantité réelle |
+|---------------------|-----------------|-----------------|
+| Entraînement        | 7               | 17 418          |
+| Validation          | 1,5             | 3 733           |
+| Test                | 1,5             | 3 738           |
+| **Total**           | **10**          | **24 889**      |
 
 La visualisation des données est présentée ci-dessous :
 
