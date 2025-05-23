@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.metrics import classification_report
 from datasets import load_from_disk
 
-model_path = "./model/best_model"
+model_path = "./model/best_model_bert_chinese"
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForSequenceClassification.from_pretrained(model_path)
 
@@ -80,7 +80,7 @@ for class_id, class_name in id2label.items():
     if class_total[class_id] > 0:
         accuracy = class_correct[class_id] / class_total[class_id] * 100
         print(f"{class_name}:{accuracy:.2f}%", end=' ')
-        print(f"{class_correct[class_id]}/{class_total[class_id]})")
+        print(f"({class_correct[class_id]}/{class_total[class_id]})")
 
 true_labels = [test_dataset[i]['labels'] for i in range(len(test_dataset))]
 print("\nReport of classification:")
