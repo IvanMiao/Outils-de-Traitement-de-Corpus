@@ -26,7 +26,7 @@ def draw_plot():
     ax2.bar(dynasties, avg_lens)
     ax2.set_title('average length of poems for each dynasty')
 
-    plt.savefig('./data/plots/dynasty_poems_stats.png', dpi=300, bbox_inches='tight')
+    plt.savefig('./figures/dynasty_poems_stats.png', dpi=300, bbox_inches='tight')
 
 def main():
     draw_plot()
