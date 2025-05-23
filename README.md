@@ -55,9 +55,13 @@ Le jeu de données a été entraîné sur trois modèles pré-entraînés de typ
 2. `bert-case-chinese`： un modèle BERT pour le chinois
 3. `ethanyt/guwenbert-base`： un modèle basé sur bert-case-chinese ayant déjà été fine-tuné sur un grand corpus de textes chinois classiques
 
+Le nombre d'époques (epoch) du premier modèle est fixé à 3. Afin de réduire le temps d'entraînement, il est fixé à 2 pour les deux autres modèles plus grands. Les autres paramètres restent inchangés.
+
 En analysant les journaux de logs durant l'entraînement, on a obtenu l'évolution de la perte (Loss) par époque (Epoch) et les performances de chaque modèle sur l'ensemble de validation :
 
 ![](./figures/training_analysis.png)
+
+On peut observer que la tendance des pertes (loss) des trois modèles est globalement similaire, et que `bert-case-chinese` et `ethanyt/guwenbert-base` présentent presque une évolution parallèle — ce qui peut s'expliquer par le fait que le second a été fine-tuné à partir du premier. Un autre fait intéressant est que, pour `distillBERT`, la perte de validation augmente après la deuxième époque ; cependant, par manque de temps et de ressources, il n’a pas été possible d’observer ce phénomène sur les deux autres modèles plus grands.
 
 ## Évaluation
 
@@ -78,6 +82,7 @@ Pour le modèle `distilled-bert-multilingual`, on a:
 | **macro avg** | 0.4488    | 0.4542  | 0.4369   | 3738    |
 | **weighted avg** | 0.4228    | 0.4248  | 0.4121   | 3738    |
 
+<br>
 Pour le modèle `bert-case-chinese`, on a:
 
 | Dynasty      | Precision | Recall  | F1-score | Support |
@@ -93,6 +98,7 @@ Pour le modèle `bert-case-chinese`, on a:
 | **macro avg**| 0.4800    | 0.4682  | 0.4580   | 3738    |
 | **weighted avg** | 0.4518 | 0.4462 | 0.4326   | 3738    |
 
+<br>
 Pour le modèle `ethanyt/guwenbert-base`, on a:
 
 | Dynasty      | Precision | Recall  | F1-score | Support |
@@ -108,6 +114,7 @@ Pour le modèle `ethanyt/guwenbert-base`, on a:
 | **macro avg**| 0.5866    | 0.5125  | 0.5150   | 3738    |
 | **weighted avg** | 0.5385 | 0.4914 | 0.4771   | 3738    |
 
+<br>
 En représentant le rappel (Recall) de chaque dynastie — c'est-à-dire le taux de bonne prédiction pour les poèmes de chaque dynastie — sous forme de graphique, des résultats obtenus sont intéressants :
 
 ![](./figures/evaluate_analysis.png)
