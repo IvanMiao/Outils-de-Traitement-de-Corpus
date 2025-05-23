@@ -83,6 +83,7 @@ Pour le modèle `distilled-bert-multilingual`, on a:
 | **weighted avg** | 0.4228    | 0.4248  | 0.4121   | 3738    |
 
 <br>
+
 Pour le modèle `bert-case-chinese`, on a:
 
 | Dynasty      | Precision | Recall  | F1-score | Support |
@@ -99,6 +100,7 @@ Pour le modèle `bert-case-chinese`, on a:
 | **weighted avg** | 0.4518 | 0.4462 | 0.4326   | 3738    |
 
 <br>
+
 Pour le modèle `ethanyt/guwenbert-base`, on a:
 
 | Dynasty      | Precision | Recall  | F1-score | Support |
@@ -115,9 +117,18 @@ Pour le modèle `ethanyt/guwenbert-base`, on a:
 | **weighted avg** | 0.5385 | 0.4914 | 0.4771   | 3738    |
 
 <br>
+
 En représentant le rappel (Recall) de chaque dynastie — c'est-à-dire le taux de bonne prédiction pour les poèmes de chaque dynastie — sous forme de graphique, des résultats obtenus sont intéressants :
 
 ![](./figures/evaluate_analysis.png)
+
+Le modèle `ethanyt/guwenbert-base`, spécialisé en chinois classique, affiche globalement les meilleures performances avec une exactitude (accuracy) de 0.4914 et un F1-score macro moyen de 0.5150. Il est suivi par bert-case-chinese (exactitude 0.4462, F1-macro 0.4580) puis distilled-bert-multilingual (exactitude 0.4248, F1-macro 0.4369).
+
+Les poèmes de la dynastie **WeiJin** possèdent probablement des caractéristiques linguistiques ou stylistiques très distinctives qui les rendent plus faciles à identifier pour les modèles.
+
+La difficulté à classifier correctement les poèmes de la dynastie **Song** pourrait indiquer que leurs traits stylistiques sont moins uniques, ou qu'ils partagent plus de similitudes avec les poèmes des dynasties adjacentes (Tang, Yuan, Ming), rendant la distinction plus complexe même pour un modèle spécialisé.
+
+La performance plus faible du modèle `ethanyt/guwenbert-base` sur la poésie **Qing** pourrait suggérer que les caractéristiques sur lesquelles ce modèle a été finement ajusté (spécifiques au chinois "classique" plus ancien) sont moins prédominantes ou discriminantes pour la poésie Qing, ou que la poésie Qing présente une plus grande hétérogénéité stylistique non capturée efficacement.
 
 ## Norme
 
