@@ -1,5 +1,7 @@
 # Outils-de-Traitement-de-Corpus
 
+**Classification poème-dynastie**
+
 Ce projet s'inscrit dans le cadre du cours "Outils de Traitement de Corpus" du Master 1 Plurital.
 
 ## Gestion de l'environnement
