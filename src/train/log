@@ -96,6 +96,21 @@ Yuan: 53.22% (438/823)
 Ming: 40.03% (313/782)
 Qing: 27.54% (157/570)
 
+Report of classification:
+              precision    recall  f1-score   support
+
+      WeiJin     0.6565    0.7350    0.6935       234
+      NanBei     0.5994    0.6032    0.6013       315
+        Tang     0.4110    0.5898    0.4845       568
+        Song     0.3103    0.1413    0.1941       446
+        Yuan     0.4183    0.5322    0.4684       823
+        Ming     0.3789    0.4003    0.3893       782
+        Qing     0.5858    0.2754    0.3747       570
+
+    accuracy                         0.4462      3738
+   macro avg     0.4800    0.4682    0.4580      3738
+weighted avg     0.4518    0.4462    0.4326      3738
+
 
 3. guwenbert
 
