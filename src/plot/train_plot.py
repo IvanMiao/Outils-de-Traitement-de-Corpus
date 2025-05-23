@@ -38,9 +38,9 @@ guwenbert_eval_epochs = [1.0, 2.0]
 
 # result from validation subsets
 test_results = {
-    'DistilBERT': 0.4248,
-    'BERT-Chinese': 0.4462,
-    'GuwenBERT': 0.4914
+    'DistilBERT': 0.4222,
+    'BERT-Chinese': 0.4241,
+    'GuwenBERT': 0.4790
 }
 
 # Accuracy for classification
