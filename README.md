@@ -65,7 +65,7 @@ On peut observer que la tendance des pertes (loss) des trois modèles est global
 
 ## Évaluation
 
-Après l'entraînement des trois modèles, une évaluation a été effectué sur le sous-ensemble de test. La classe `classification_report` de sklearn est utilisé pour obtenir une évaluation plus détaillée des tâches de classification.
+Après l'entraînement des trois modèles, une évaluation a été effectué sur le sous-ensemble de test. La classe `classification_report` de `sklearn` est utilisé pour obtenir une évaluation plus détaillée des tâches de classification.
 
 Pour le modèle `distilled-bert-multilingual`, on a:
 
