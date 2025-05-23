@@ -17,14 +17,20 @@ distilbert_epochs = np.linspace(0.11, 2.99, len(distilbert_train_loss))
 distilbert_eval_epochs = [1.0, 2.0, 3.0]
 
 #    bert-base-chinese
-bert_chinese_train_loss = [1.7852, 1.6555, 1.6018, 1.5566, 1.5164, 1.4426, 1.3377, 1.3184, 1.3148, 1.2707, 1.2533]
+bert_chinese_train_loss = [
+    1.7852, 1.6555, 1.6018, 1.5566, 1.5164, 1.4426,
+    1.3377, 1.3184, 1.3148, 1.2707, 1.2533
+]
 bert_chinese_eval_loss = [1.4911, 1.4106]
 bert_chinese_eval_accuracy = [0.3681, 0.4241]
 bert_chinese_epochs = np.linspace(0.17, 1.89, len(bert_chinese_train_loss))
 bert_chinese_eval_epochs = [1.0, 2.0]
 
 #    guwenbert-base
-guwenbert_train_loss = [1.677, 1.5626, 1.4769, 1.4279, 1.3749, 1.3334, 1.2207, 1.2089, 1.2195, 1.1771, 1.1501]
+guwenbert_train_loss = [
+    1.677, 1.5626, 1.4769, 1.4279, 1.3749, 1.3334,
+    1.2207, 1.2089, 1.2195, 1.1771, 1.1501
+]
 guwenbert_eval_loss = [1.3528, 1.2604]
 guwenbert_eval_accuracy = [0.4380, 0.4790]
 guwenbert_epochs = np.linspace(0.17, 1.89, len(guwenbert_train_loss))
@@ -39,9 +45,15 @@ test_results = {
 
 # Accuracy for classification
 dynasties = ['WeiJin', 'NanBei', 'Tang', 'Song', 'Yuan', 'Ming', 'Qing']
-distilbert_dynasty_acc = [0.8248, 0.5397, 0.3680, 0.1211, 0.5115, 0.3632, 0.4509]
-bert_chinese_dynasty_acc = [0.7350, 0.6032, 0.5898, 0.1413, 0.5322, 0.4003, 0.2754]
-guwenbert_dynasty_acc = [0.8376, 0.6413, 0.5546, 0.2287, 0.6877, 0.4361, 0.2018]
+distilbert_dynasty_acc = [
+    0.8248, 0.5397, 0.3680, 0.1211, 0.5115, 0.3632, 0.4509
+]
+bert_chinese_dynasty_acc = [
+    0.7350, 0.6032, 0.5898, 0.1413, 0.5322, 0.4003, 0.2754
+]
+guwenbert_dynasty_acc = [
+    0.8376, 0.6413, 0.5546, 0.2287, 0.6877, 0.4361, 0.2018
+]
 
 # number of samples
 samples = [234, 315, 568, 446, 823, 782, 570]
@@ -52,12 +64,18 @@ fig.suptitle('Model Training Analysis', fontsize=18)
 
 # 2.1 curve of Loss/Epoch
 ax = axes1[0]
-ax.plot(distilbert_epochs, distilbert_train_loss, 'b-', label='train loss: DistilBERT')
-ax.plot(distilbert_eval_epochs, distilbert_eval_loss, 'bo--', label='validation loss: DistilBERT')
-ax.plot(bert_chinese_epochs, bert_chinese_train_loss, 'r-', label='train loss: BERT-Chinese')
-ax.plot(bert_chinese_eval_epochs, bert_chinese_eval_loss, 'ro--', label='validation loss: BERT-Chinese')
-ax.plot(guwenbert_epochs, guwenbert_train_loss, 'g-', label='train loss: GuwenBERT')
-ax.plot(guwenbert_eval_epochs, guwenbert_eval_loss, 'go--', label='validation loss: GuwenBERT')
+ax.plot(distilbert_epochs, distilbert_train_loss,
+        'b-', label='train loss: DistilBERT')
+ax.plot(distilbert_eval_epochs, distilbert_eval_loss,
+        'bo--', label='validation loss: DistilBERT')
+ax.plot(bert_chinese_epochs, bert_chinese_train_loss,
+        'r-', label='train loss: BERT-Chinese')
+ax.plot(bert_chinese_eval_epochs, bert_chinese_eval_loss,
+        'ro--', label='validation loss: BERT-Chinese')
+ax.plot(guwenbert_epochs, guwenbert_train_loss,
+        'g-', label='train loss: GuwenBERT')
+ax.plot(guwenbert_eval_epochs, guwenbert_eval_loss,
+        'go--', label='validation loss: GuwenBERT')
 ax.set_xlabel('Epoch')
 ax.set_ylabel('Loss')
 ax.set_title('Training and Validation Loss')
@@ -101,21 +119,23 @@ ax.legend()
 ax.grid(True, linestyle='--', alpha=0.7, axis='y')
 
 # 2.4 Relation bewtween samples and accuracy
+total_accuracy = (distilbert_dynasty_acc +
+                  bert_chinese_dynasty_acc + guwenbert_dynasty_acc)
 ax = axes2[1]
 scatter_df = pd.DataFrame({
     'samples': samples * 3,
-    'accuracy': distilbert_dynasty_acc + bert_chinese_dynasty_acc + guwenbert_dynasty_acc,
+    'accuracy': total_accuracy,
     'model': ['DistilBERT'] * 7 + ['BERT-Chinese'] * 7 + ['GuwenBERT'] * 7,
     'dynasty': dynasties * 3
 })
-sns.scatterplot(data=scatter_df, x='samples', y='accuracy', hue='model', 
+sns.scatterplot(data=scatter_df, x='samples', y='accuracy', hue='model',
                 style='dynasty', s=100, ax=ax)
 ax.set_title('Relation: Sample Size & Accuracy')
 ax.grid(True, linestyle='--', alpha=0.7)
 
 # add dynasty label
 for i, row in scatter_df.iterrows():
-    ax.annotate(row['dynasty'], 
+    ax.annotate(row['dynasty'],
                 (row['samples'], row['accuracy']),
                 xytext=(5, 5),
                 textcoords='offset points',
