@@ -4,6 +4,8 @@
 
 Ce projet s'inscrit dans le cadre du cours "Outils de Traitement de Corpus" du Master 1 Plurital.
 
+Le dataset et le modèle sont tous les deux disponibles sur 🤗Hugging Face : [Dataset](https://huggingface.co/datasets/IvanMiao/ch_poems_for_classification), [Model](https://huggingface.co/IvanMiao/PoemDynasty-ch-RoBERTa)
+
 ## Gestion de l'environnement
 
 Ce projet utilise `uv` pour la gestion de l'environnement.

@@ -1,5 +1,7 @@
 # 詩分唐宋：诗歌-朝代分类
 
+数据集和模型均已上传至 🤗Hugging Face: [Dataset](https://huggingface.co/datasets/IvanMiao/ch_poems_for_classification), [Model](https://huggingface.co/IvanMiao/PoemDynasty-ch-RoBERTa)
+
 ## 环境管理
 
 本项目使用 `uv` 管理Python环境。

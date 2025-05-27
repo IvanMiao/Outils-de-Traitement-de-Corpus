@@ -1,6 +1,6 @@
 # 詩分唐宋: Poem-Dynasty Classification
 
-This project is part of the "Corpus Processing Tools" course for the Master 1 Plurital program.
+ The dataset and the model are now available on 🤗Hugging Face : [Dataset](https://huggingface.co/datasets/IvanMiao/ch_poems_for_classification), [Model](https://huggingface.co/IvanMiao/PoemDynasty-ch-RoBERTa)
 
 ## Environment Management
 
