@@ -38,7 +38,7 @@ The obtained data is saved in `.csv` format, then merged into a single large dat
 
 Data visualization is presented below:
 
-![](./figures/dynasty_poems_stats.png)
+![](../figures/dynasty_poems_stats.png)
 
 The first two dynasties (Weijin and Nanbei) show the smallest number of poems, which is logical as they are the oldest dynasties and thus have the fewest preserved works. The Weijin dynasty shows the highest average poem length, as in our corpus, **fu** 赋 are also considered poems. During this period, the creation of four-character poems and **fu** was proportionally more frequent than in the other six dynasties. The latter, particularly after the Tang dynasty, favored the poetic forms **jueju** 绝句 (24 or 32 characters, including punctuation) and **lüshi** 律诗 (48 or 64 characters). Considering that ancient-style poems and "fu" were occasionally created and are much longer than "jueju" and "lüshi," the average length obtained (60-80 characters) seems reasonable.
 
@@ -56,7 +56,7 @@ The number of epochs for the first model is set to 3. To reduce training time, i
 
 By analyzing the log journals during training, the evolution of loss per epoch and the performance of each model on the validation set were obtained:
 
-![](./figures/training_analysis.png)
+![](../figures/training_analysis.png)
 
 It can be observed that the loss trend of the three models is broadly similar, and that `bert-case-chinese` and `ethanyt/guwenbert-base` show an almost parallel evolution — which can be explained by the fact that the latter was fine-tuned from the former. Another interesting fact is that, for `distillBERT`, the validation loss increases after the second epoch; however, due to lack of time and resources, it was not possible to observe this phenomenon on the two larger models.
 
@@ -117,7 +117,7 @@ For the `ethanyt/guwenbert-base` model, we have:
 
 By representing the Recall for each dynasty — i.e., the rate of correct predictions for poems from each dynasty — in a graph, the obtained results are interesting:
 
-![](./figures/evaluate_analysis.png)
+![](../figures/evaluate_analysis.png)
 
 The `ethanyt/guwenbert-base` model, specialized in classical Chinese, generally shows the best performance with an accuracy of 0.4914 and an average macro F1-score of 0.5150. It is followed by bert-case-chinese (accuracy 0.4462, F1-macro 0.4580) and then distilled-bert-multilingual (accuracy 0.4248, F1-macro 0.4369).
 

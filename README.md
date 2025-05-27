@@ -1,6 +1,6 @@
 # 詩分唐宋： Classification poème-dynastie
 
-<div><p style="text-align: center ;">  <a href="./doc/readme_ch.md">中文</a>  <a href="./doc/readme_en.md">English</a>  </p></div>
+<p style="text-align:center ;">  <a href="./doc/readme_ch.md"><u>中文</u></a>  <a href="./doc/readme_en.md"><u>English</u></a>  </p>
 
 Ce projet s'inscrit dans le cadre du cours "Outils de Traitement de Corpus" du Master 1 Plurital.
 
